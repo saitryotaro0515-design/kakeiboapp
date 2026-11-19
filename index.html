@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0d2844">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="家計ラボ">
+  <meta name="description" content="日別の家計簿、週平均、月末の支出予測、年間余剰資金を端末内で管理する家計アプリ">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon-192.png" sizes="192x192">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+  <title>家計ラボ | 家計・収支管理</title>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-icon">◈</div><div><strong>家計ラボ</strong><small>日々を見える化する</small></div></div>
+      <div class="side-group">メニュー</div>
+      <nav class="side-nav" id="sideNav" aria-label="メインメニュー"></nav>
+      <div class="side-foot"><div class="privacy-dot"></div><span>あなたの端末に保存<br><small>ログイン・サーバー不要</small></span></div>
+    </aside>
+    <div class="main-area">
+      <header class="topbar">
+        <div class="top-left"><div class="mobile-brand">◈ <strong>家計ラボ</strong></div><div><div id="pageEyebrow" class="eyebrow">PERSONAL FINANCE</div><h1 id="pageTitle">ホーム</h1></div></div>
+        <div class="top-actions"><span class="local-pill"><span class="privacy-dot"></span>端末内保存</span><button type="button" class="btn primary top-add" data-action="new-transaction">＋ 収支を登録</button></div>
+      </header>
+      <main class="content" id="view" aria-live="polite"></main>
+      <footer class="footer">家計ラボ · データはこの端末のブラウザに保存されます · 定期的なバックアップをおすすめします</footer>
+    </div>
+  </div>
+  <nav class="bottom-nav" id="bottomNav" aria-label="モバイルメニュー"></nav>
+  <dialog id="transactionDialog" class="dialog"><form id="transactionForm" novalidate><div class="dialog-head"><div><div class="eyebrow">TRANSACTION</div><h2 id="dialogTitle">収支を登録</h2></div><button type="button" class="icon-btn" data-action="close-dialog" aria-label="閉じる">✕</button></div><div class="dialog-body"><input type="hidden" id="txId"><div class="segmented" id="typeSwitch"><button type="button" data-type="expense" class="active">支出</button><button type="button" data-type="income">収入</button><button type="button" data-type="transfer">資金移動</button></div><div class="form-grid"><label>利用日 / 入金日<input id="txDate" type="date" required></label><label>金額（円）<input id="txAmount" type="number" min="1" step="1" placeholder="例：980" required></label><label>カテゴリー<select id="txCategory"></select></label><label>支払い方法<select id="txPayment"></select></label><label class="wide">引落日（任意）<input id="txWithdrawal" type="date"><small>楽天カードなど、利用日とは別の日に引き落とされる場合に入力。</small></label><label class="wide">メモ（任意）<input id="txMemo" type="text" maxlength="120" placeholder="例：ランチ / スーパー"></label></div><div id="formError" class="form-error" role="alert"></div></div><div class="dialog-actions"><button type="button" class="btn outline" data-action="close-dialog">キャンセル</button><button type="submit" class="btn primary">保存する</button></div></form></dialog>
+  <input type="file" id="jsonFile" accept=".json,application/json" hidden>
+  <input type="file" id="csvFile" accept=".csv,text/csv" hidden>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js" defer></script>
+</body>
+</html>
